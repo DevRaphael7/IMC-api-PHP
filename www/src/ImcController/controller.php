@@ -5,6 +5,7 @@ require dirname(__DIR__) . "\models\\response_model.php";
 class ImcController {
 
     public function processRequest(string $method, array $path) {
+
         switch ($method) {
             case "GET":
 
@@ -17,7 +18,18 @@ class ImcController {
                     return;
                 }
 
-                $imc = $peso / ($altura * $altura);
+                $imc = $peso / ($altura * 2);
+                $categoria = $this->categoria($imc);
+
+                echo successResponse(array([
+                    "Valor do IMC" => (float) number_format($imc, 2),
+                    "Categoria" => $categoria
+                ]), "Peso do IMC");
+            break;
+            case "POST":
+                $data = json_decode(file_get_contents("php://input"), true);
+
+                $imc = (float) $data["peso"] / ( (float) $data["altura"] * 2);
                 $categoria = $this->categoria($imc);
 
                 echo successResponse(array([
