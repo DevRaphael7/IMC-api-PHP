@@ -15,3 +15,14 @@ function errorResponse($message) {
         "status" => 400
     ]);
 }
+
+function responseMethodNotAllow(string $methods) {
+    http_response_code(405);
+    header("Allow: $methods");
+
+    return  json_encode([
+        "message" => "Método inválido",
+        "data" => null,
+        "status" => 405
+    ]);
+}

@@ -12,6 +12,7 @@ class ImcController {
                 $altura = (float) $path[7];
 
                 if (empty($peso) || empty($altura)) {
+                    http_response_code(400);
                     echo errorResponse("Peso e/ou altura não informados.");
                     return;
                 }
@@ -25,8 +26,7 @@ class ImcController {
                 ]), "Peso do IMC");
             break;
             default:
-                // http_response_code(400) //Setar como status 400.
-                echo "Method not right - 400";
+                echo responseMethodNotAllow("GET");
             break;
         }
     }
