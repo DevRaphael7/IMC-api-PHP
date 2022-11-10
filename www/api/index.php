@@ -1,8 +1,7 @@
 <?php
 
-header('Content-Type: application/json; charset=utf-8');
-
-require dirname(__DIR__) . "\src\ImcController\controller.php";
+require dirname(__DIR__) . "\modules\controllers.php";
+require dirname(__DIR__) . "\modules\headers.php";
 
 $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
